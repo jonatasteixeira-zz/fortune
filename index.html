@@ -11,11 +11,11 @@
                 scriptCharset: "utf-8",
                 contentType: "application/json; charset=utf-8"
             });
-            $.getJSON("./full.json", function(json) { 
-                getRandom(json);
+            $.getJSON("./full.json", function(forunte) { 
+                getFortune(forunte);
             });
 
-            function formatMsg(msg) {
+            function cowsay(msg) {
                 let text=msg.split('\n');
                 let numLinesPerText=text.length-1;
                 let numCharsPerLine=0;
@@ -24,8 +24,6 @@
 
                 function lineSize(string) {
                     let size = 0;
-                    console.log("<".repeat(80))
-                    console.log(`<${string}<`)
                     for(let i = 0; i < string.length; i++) {
                         if (string[i] === '\t') {
                             size += (8-((size+2) % 8))
@@ -33,8 +31,6 @@
                             size++;
                         }
                     }
-                    console.log(`>${size}>`)
-                    console.log(">".repeat(80))
                     return size;
                 }
 
@@ -73,33 +69,31 @@
                 return result;
             }
 
-            function getRandom(fortunes) {
+            function getFortune(fortunes) {
                 let idCategory =  Math.floor(Math.random() * fortunes.length);
                 let idFortune = Math.floor(Math.random() * fortunes[idCategory].list.length);
                 let cow='        \\   ^__^\n         \\  (oo)\\_______\n            (__)\\       )\\/\\\n                ||----w |\n                ||     ||'
-                
-                console.log(`{Category: ${idCategory} - Fortune: ${idFortune}`);
                 let fortune = fortunes[idCategory].list[idFortune];
 
-                document.getElementById('fortune-msg').innerHTML = formatMsg(fortune.text);
+                document.getElementById('fortune-msg').innerHTML = cowsay(fortune.text);
                 document.getElementById('fortune-details').innerHTML = `${String('\t\t -- ')}${String(fortune.author)}`;
                 document.getElementById('fortune-category').innerHTML = `${String('\t\t * ')}${String(fortunes[idCategory].name.split('/').pop())}`;;
             }
         </script>
 
         <style>
-            .center {
+            .fortune-msg {
             margin: auto;
-            width: 600px;
+            width: 625px;
             padding: 10px;
             font-family: Courier, monospace; 
             font-size: 12px;
             color: white;
             background-color: black;
             }
-            .datails {
+            .fortune-datails {
                 margin: auto;
-                width: 600px;
+                width: 625px;
                 padding-right: 10px;
                 padding-left: 10px;
                 padding-top: 0px;
@@ -110,13 +104,12 @@
                 background-color: black;
                 text-align: right;
             }
-
         </style>
     </head>
 
     <body>
-        <pre class="center" id="fortune-msg"> </pre>
-        <pre class="datails" id="fortune-details"></pre>
-        <pre class="datails" id="fortune-category"></pre>
+        <pre class="fortune-msg" id="fortune-msg"> </pre>
+        <pre class="fortune-datails" id="fortune-details"></pre>
+        <pre class="fortune-datails" id="fortune-category"></pre>
     </body>
 </html>
