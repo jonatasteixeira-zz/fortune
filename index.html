@@ -1,0 +1,60 @@
+
+<html>
+    <head>
+        <meta http-equiv='cache-control' content='no-cache'>
+        <meta http-equiv='expires' content='0'>
+        <meta http-equiv='pragma' content='no-cache'>
+        <meta charset="utf-8"/>
+        <script language="JavaScript" type="text/javascript" src="jquery-3.5.0.min.js"></script>
+        <script>
+            $.ajaxSetup({
+                scriptCharset: "utf-8",
+                contentType: "application/json; charset=utf-8"
+            });
+            $.getJSON("./full.json", function(json) { 
+                getRandom(json);
+            });
+
+            function getRandom(fortunes) {
+                let idCategory = Math.floor(Math.random() * fortunes.length);
+                let idFortune = Math.floor(Math.random() * fortunes[idCategory].list.length);
+                fortune = fortunes[idCategory].list[idFortune];
+                document.getElementById('fortune-msg').innerHTML = `${String(fortune.text)}`;
+                document.getElementById('fortune-details').innerHTML = `${String('\t\t -- ')}${String(fortune.author)}`;
+                document.getElementById('fortune-category').innerHTML = `${String('\t\t * ')}${String(fortunes[idCategory].name.split('/').pop())}`;;
+            }
+        </script>
+
+        <style>
+            .center {
+            margin: auto;
+            width: 600px;
+            padding: 10px;
+            font-family: Courier, monospace; 
+            font-size: 12px;
+            color: white;
+            background-color: black;
+            }
+            .datails {
+                margin: auto;
+                width: 600px;
+                padding-right: 10px;
+                padding-left: 10px;
+                padding-top: 0px;
+                padding-bottom: 0px;
+                font-family: Courier, monospace;
+                font-size: 10px;
+                color: white;
+                background-color: black;
+                text-align: right;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <pre class="center" id="fortune-msg"> </pre>
+        <pre class="datails" id="fortune-details"></pre>
+        <pre class="datails" id="fortune-category"></pre>
+    </body>
+</html>
