@@ -28,9 +28,7 @@
                     console.log(`<${string}<`)
                     for(let i = 0; i < string.length; i++) {
                         if (string[i] === '\t') {
-                            console.log(`=== size: ${size} === i: ${i} ===`)
                             size += (8-((size+2) % 8))
-                            console.log(`=== size: ${size} === i: ${i} ===`)
                         } else {
                             size++;
                         }
@@ -48,7 +46,6 @@
                         }
                     }
                 });
-
 
                 let header=` ${"-".repeat(numCharsPerLine+2)} \n`
                 let footer=` ${"-".repeat(numCharsPerLine+2)} \n`
@@ -71,12 +68,8 @@
                         }
                     }
                 });
-
                 result += `${footer}`;
                 result += `${cow}`;
-
-                console.log(`Max line size: ${numCharsPerLine}`);
-                console.log(result);
                 return result;
             }
 
@@ -88,15 +81,10 @@
                 console.log(`{Category: ${idCategory} - Fortune: ${idFortune}`);
                 let fortune = fortunes[idCategory].list[idFortune];
 
-                // testes
-                // {Category: 27 - Fortune: 380
-                // {Category: 1 - Fortune: 13
                 document.getElementById('fortune-msg').innerHTML = formatMsg(fortune.text);
                 document.getElementById('fortune-details').innerHTML = `${String('\t\t -- ')}${String(fortune.author)}`;
                 document.getElementById('fortune-category').innerHTML = `${String('\t\t * ')}${String(fortunes[idCategory].name.split('/').pop())}`;;
             }
-
-
         </script>
 
         <style>
